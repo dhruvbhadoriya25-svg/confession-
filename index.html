@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Just for You 💖</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      height: 100vh;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #ffd6e8, #e0c3fc);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.9);
+      padding: 30px 35px;
+      border-radius: 26px;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+      animation: popIn 1s ease;
+      max-width: 360px;
+    }
+
+    h1 {
+      font-size: 1.7rem;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 1rem;
+      color: #444;
+      line-height: 1.4;
+    }
+
+    .heart {
+      font-size: 3rem;
+      animation: beat 1.2s infinite;
+      margin: 15px 0;
+    }
+
+    button {
+      margin: 10px;
+      padding: 10px 22px;
+      border: none;
+      border-radius: 22px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .yes {
+      background: #ff5fa2;
+      color: white;
+    }
+
+    .no {
+      background: #ddd;
+      color: #555;
+      position: relative;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+    }
+
+    .confession, .final {
+      display: none;
+      margin-top: 15px;
+      animation: fadeIn 0.8s ease;
+      font-weight: 500;
+    }
+
+    .final {
+      color: #ff3f8e;
+      font-size: 1.05rem;
+    }
+
+    .floating {
+      position: absolute;
+      bottom: -50px;
+      font-size: 24px;
+      animation: floatUp 6s linear infinite;
+      opacity: 0.7;
+    }
+
+    @keyframes beat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+
+    @keyframes popIn {
+      from { transform: scale(0.5); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes floatUp {
+      from { transform: translateY(0); }
+      to { transform: translateY(-120vh); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>Hey you 🌸</h1>
+    <p>I’ve been wanting to say this for a while…</p>
+    <div class="heart">💗</div>
+
+    <div class="confession" id="confession">
+      I don’t know how or when it happened, but you became my favourite part of the day. I like you. Like… really like you.
+      <br><br>
+      So… will you be mine? 🥺
+      <br><br>
+      <button class="yes" onclick="sayYes()">Yes 💕</button>
+      <button class="no" onclick="sayNo()">No 🙃</button>
+    </div>
+
+    <button id="startBtn" class="yes" onclick="reveal()">Tap here</button>
+
+    <div class="final" id="final">
+      Okay wow… you said yes 🥹💖<br><br>
+      Thank you for choosing me. I promise I’ll try every day to make you smile, annoy you a little, and care for you a lot.
+      <br><br>
+      I’m really happy right now. Like, stupid happy. 💫
+    </div>
+  </div>
+
+  <script>
+    function reveal() {
+      document.getElementById('confession').style.display = 'block';
+      document.getElementById('startBtn').style.display = 'none';
+    }
+
+    const noMessages = [
+      "Please na 😭",
+      "Are you sure? My heart is right here 🥲",
+      "Don’t be so cold, think again 😔",
+      "Okay that hurt a little… try again 🫠",
+      "You’re not allowed to say no btw 🙃"
+    ];
+
+    let noCount = 0;
+
+    function sayNo() {
+      alert(noMessages[noCount % noMessages.length]);
+      noCount++;
+    }
+
+    function sayYes() {
+      document.getElementById('confession').style.display = 'none';
+      document.getElementById('final').style.display = 'block';
+    }
+
+    const emojis = ['💖','🌸','✨','💗','🦋'];
+    setInterval(() => {
+      const el = document.createElement('div');
+      el.className = 'floating';
+      el.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+      el.style.left = Math.random() * 100 + 'vw';
+      el.style.animationDuration = (4 + Math.random() * 3) + 's';
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 7000);
+    }, 600);
+  </script>
+
+</body>
+</html>
